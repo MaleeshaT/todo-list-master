@@ -1,31 +1,133 @@
-/* Default Light Theme */
-body {
-    background-color: #fff;
-    color: #000;
+/* Apply full height to body and ensure no default margin */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;  /* Center vertically */
+    justify-content: center; /* Center horizontally */
     font-family: Arial, sans-serif;
+    position: relative; /* Ensure child elements can use absolute positioning */
 }
 
-.theme-selector button {
-    margin: 5px;
+/* Main container centered in the viewport */
+#main-container {
+    text-align: center; /* Center text inside the container */
+    display: flex;
+    flex-direction: column; /* Arrange items vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    position: relative; /* Ensure relative positioning for child elements */
+    padding: 20px;
 }
 
+/* Typing animation for the app name */
+#app-name {
+    font-family: 'Courier New', Courier, monospace; /* Different font */
+    font-size: 48px; /* Larger font size */
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 4px solid; /* Thicker cursor */
+    width: 0;
+    animation: typing 4s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
+    margin-bottom: 30px; /* Space between title and other content */
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 350px; /* Adjust this to fit the text length */ }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: black; }
+}
+
+/* Position theme buttons in the top right corner */
+.theme-selector {
+    position: absolute; /* Absolute positioning relative to the body */
+    top: 10px; /* Distance from the top of the page */
+    right: 10px; /* Distance from the right edge of the page */
+    display: flex;
+    flex-direction: column; /* Arrange buttons vertically */
+}
+
+.theme-button {
+    border: 2px solid;
+    border-radius: 50%;
+    width: 20px; /* Size of buttons */
+    height: 20px; /* Size of buttons */
+    margin: 0px; /* Space between buttons */
+    cursor: pointer;
+    background-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light Theme Button */
+#light-theme {
+    background-color: #fff;
+    border-color: #000;
+}
+
+/* Dark Theme Button */
+#dark-theme {
+    background-color: #000;
+    border-color: #fff;
+}
+
+/* Hover effects */
+.theme-button:hover {
+    opacity: 0.8;
+}
+
+/* Task Form Styling */
 #task-form {
-    margin: 20px;
+    margin: 30px;
+    text-align: center;
 }
 
+#task-form input[type="text"],
+#task-form input[type="date"],
+#task-form input[type="time"] {
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+#add-task {
+    width: 150px;
+    height: 45px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 2px solid #000;
+    background-color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#add-task:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+/* Task Container Styling */
 #task-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
 }
 
 .card {
     background-color: #eee;
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 15px;
-    margin: 10px;
-    width: 300px;
+    padding: 20px;
+    margin: 15px;
+    width: 350px;
 }
 
 .date-card {
@@ -33,8 +135,25 @@ body {
 }
 
 .task-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.task-checkbox {
+    margin-right: 10px;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.delete-task {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
 }
 
 /* Dark Theme */
@@ -51,4 +170,15 @@ body.dark-theme #task-container {
 body.dark-theme .card {
     background-color: #555;
     color: #ddd;
+}
+
+/* Dark Theme Button in Dark Mode */
+body.dark-theme #light-theme {
+    background-color: #fff;
+    border-color: #000;
+}
+
+body.dark-theme #dark-theme {
+    background-color: #000;
+    border-color: #fff;
 }

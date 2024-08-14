@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do App</title>
+    <title>Task Manager</title>
     <link rel="stylesheet" href="CSS/main.css"> <!-- Link to your CSS -->
 </head>
+
 <body>
-    <div class="theme-selector">
-        <button id="light-theme">Light Theme</button>
-        <button id="dark-theme">Dark Theme</button>
-    </div>
+    <div id="main-container">
+        <div id="app-name" class="typing-animation">Task Manager</div>
 
-    <div id="task-form">
-        <input type="text" id="task-name" placeholder="Task Name">
-        <input type="date" id="task-date">
-        <input type="time" id="task-time">
-        <button id="add-task">Add Task</button>
-    </div>
+        <div class="theme-selector">
+            <button id="light-theme" class="theme-button"></button>
+            <button id="dark-theme" class="theme-button"></button>
+        </div>
 
-    <div id="task-container">
-        <!-- Cards will be generated here -->
+        <div id="task-form">
+            <input type="text" id="task-name" placeholder="Task Name">
+            <input type="date" id="task-date">
+            <input type="time" id="task-time">
+            <button id="add-task">Add Task</button>
+        </div>
+
+        <div id="task-container">
+            <!-- Cards will be generated here -->
+        </div>
     </div>
 
     <script src="JS/main.js"></script> <!-- Link to your JavaScript -->
 </body>
+
 </html>

@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const time = taskTimeInput.value;
 
         if (name && date && time) {
-            tasks.push({ name, date, time });
+            tasks.push({ name, date, time, completed: false });
             renderTasks();
         } else {
             alert('Please fill out all fields.');
@@ -46,14 +46,31 @@ document.addEventListener('DOMContentLoaded', () => {
             dateCard.innerHTML = `<h2>${new Date(date).toDateString()}</h2>`;
             taskContainer.appendChild(dateCard);
 
-            tasksByDate[date].forEach(task => {
+            tasksByDate[date].forEach((task, index) => {
                 const taskCard = document.createElement('div');
                 taskCard.className = 'card task-card';
                 taskCard.innerHTML = `
-                    <h3>${task.name}</h3>
+                    <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''}>
+                    <h3 class="${task.completed ? 'completed' : ''}">${task.name}</h3>
                     <p>Time: ${task.time}</p>
+                    <button class="delete-task">❌</button>
                 `;
                 dateCard.appendChild(taskCard);
+
+                // Handle checkbox change
+                const checkbox = taskCard.querySelector('.task-checkbox');
+                checkbox.addEventListener('change', () => {
+                    tasksByDate[date][index].completed = checkbox.checked;
+                    renderTasks(); // Re-render tasks to reflect changes
+                });
+
+                // Handle delete button click
+                const deleteButton = taskCard.querySelector('.delete-task');
+                deleteButton.addEventListener('click', () => {
+                    tasksByDate[date].splice(index, 1);
+                    tasks = tasks.filter(task => task.date !== date || tasksByDate[date].includes(task));
+                    renderTasks(); // Re-render tasks after deletion
+                });
             });
         });
     }
@@ -69,3 +86,20 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('dark-theme');
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const appName = "Task Manager";
+    const appNameElement = document.getElementById('app-name');
+    let index = 0;
+
+    function typeEffect() {
+        if (index < appName.length) {
+            appNameElement.innerHTML += appName.charAt(index);
+            index++;
+            setTimeout(typeEffect, 100); // Adjust the speed here
+        }
+    }
+
+    typeEffect();
+});
+
